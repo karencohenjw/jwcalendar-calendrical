@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jwcalendar-calendrical"
+version = "0.1.0"
+description = "Exact calendrical computation, calendar topology, and calendar-software verification for Python."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["calendar", "calendrical", "civil-date", "gregorian", "julian-calendar", "iso-week", "calendar-grid", "holiday", "business-calendar", "date-testing"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8", "hypothesis>=6", "coverage[toml]>=7"]
+dev = ["ruff>=0.8", "mypy>=1.13", "build>=1.2", "twine>=6", "pytest>=8", "hypothesis>=6", "coverage[toml]>=7"]
+numpy = ["numpy>=1.24"]
+pandas = ["pandas>=2"]
+
+[project.scripts]
+jwcal = "jwcalendar_calendrical.cli.main:main"
+
+[project.urls]
+Homepage = "https://jwcalendar.com/"
+"2027 Calendar Reference" = "https://jwcalendar.com/yearly-calendar/"
+"Julian Reference" = "https://jwcalendar.com/julian-calendar/"
+"Week Number Reference" = "https://jwcalendar.com/week-numbers/"
+"Holiday Reference" = "https://jwcalendar.com/holidays/"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jwcalendar_calendrical"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/docs", "/examples", "/benchmarks", "/README.md", "/LICENSE", "/CHANGELOG.md", "/CONTRIBUTING.md", "/SECURITY.md", "/pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]
+ignore_missing_imports = true
